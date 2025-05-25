@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аруханның Ұзытуы</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url('https://grizly.club/uploads/posts/2022-12/1671780436_grizly-club-p-fon-ornament-kazakhskii-natsionalnii-23.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Montserrat', sans-serif;
+      color: #3b2314;
+      text-align: center;
+      line-height: 1.6;
+      overflow-x: hidden;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      background: url('https://via.placeholder.com/600x1200') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.75);
+      z-index: 1;
+      backdrop-filter: blur(4px);
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 20px;
+      margin: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 420px;
+      transition: transform 0.3s ease;
+    }
+
+    .content:hover {
+      transform: translateY(-5px);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #d32f2f;
+      font-style: italic;
+      margin: 10px 0;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #3b2314;
+      margin: 10px 0;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 5px 0;
+      color: #5d4037;
+    }
+
+    .decoration {
+      font-size: 1.3rem;
+      color: #3b2314;
+      font-weight: bold;
+      margin: 15px 0;
+      padding: 12px;
+      background: url('https://via.placeholder.com/100x100?text=Flower') no-repeat center center;
+      background-size: contain;
+      border-top: 3px solid #d32f2f;
+      border-bottom: 3px solid #d32f2f;
+      position: relative;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .decoration::before,
+    .decoration::after {
+      content: "❁";
+      color: #d32f2f;
+      font-size: 1.8rem;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .decoration::before {
+      left: -30px;
+    }
+
+    .decoration::after {
+      right: -30px;
+    }
+
+    .play-button {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 15px 0;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .play-button:hover {
+      background: #b71c1c;
+      transform: scale(1.15);
+    }
+
+    .calendar {
+      background: rgba(255, 255, 255, 0.98);
+      padding: 15px;
+      border-radius: 12px;
+      margin: 15px 0;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .calendar-grid span {
+      padding: 8px;
+      border-radius: 50%;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .calendar-grid .selected {
+      background: #d32f2f;
+      color: white;
+      box-shadow: 0 0 6px rgba(211, 47, 47, 0.5);
+    }
+
+    .calendar-grid span:hover {
+      background: #ffebee;
+    }
+
+    .details {
+      margin: 15px 0;
+    }
+
+    .details p {
+      font-size: 1rem;
+      color: #3b2314;
+    }
+
+    .details strong {
+      font-weight: 600;
+      color: #d32f2f;
+    }
+
+    .map-link {
+      margin: 10px 0;
+    }
+
+    .map-link img {
+      width: 45px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .map-link img:hover {
+      transform: scale(1.1);
+    }
+
+    .attendance {
+      background: rgba(255, 255, 255, 0.98);
+      padding: 15px;
+      border-radius: 12px;
+      margin: 15px 0;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .attendance label {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 0.95rem;
+      color: #3b2314;
+      cursor: pointer;
+    }
+
+    .attendance input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d32f2f;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .attendance input[type="text"]:focus {
+      border-color: #b71c1c;
+      box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
+    }
+
+    .attendance input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .button {
+      background: #d32f2f;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px 0;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .button:hover {
+      background: #b71c1c;
+      transform: translateY(-3px);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .timer-title {
+      font-size: 1.5rem;
+      color: #3b2314;
+      margin: 15px 0;
+      font-weight: 600;
+      
+    }
+
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      margin: 20px 20px 40px;
+    }
+
+    .timer div {
+      background: #d32f2f;
+      padding: 12px;
+      border-radius: 50%;
+      min-width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+      animation: none;
+      /* Алдыңғы pulse анимациясын алып тастадым, суретте анимация жоқ */
+    }
+
+    .labels{
+      position: relative;
+      display: flex;
+      gap: 20px;
+      font-size: 0.85rem;
+      padding: 5px;
+      top:  -20px;
+      left: 40px;
+    }
+
+    .timer p {
+      font-size: 0.85rem;
+      color: #3b2314;
+      margin: 5px 0 0 0;
+    }
+
+    .social {
+      font-size: 0.9rem;
+      color: #d32f2f;
+      margin-top: 15px;
+      font-style: italic;
+    }
+
+    .social a {
+      color: #d32f2f;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social a:hover {
+      color: #b71c1c;
+    }
+
+    @media (max-width: 400px) {
+      .content {
+        padding: 15px;
+        width: 95%;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+
+      .decoration {
+        font-size: 1.1rem;
+      }
+
+      .decoration::before,
+      .decoration::after {
+        font-size: 1.5rem;
+      }
+
+      .calendar-grid span {
+        padding: 6px;
+        font-size: 0.85rem;
+      }
+
+      .timer {
+        font-size: 1.1rem;
+      }
+
+      .timer div {
+        min-width: 45px;
+        padding: 10px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <audio id="background-music" autoplay loop muted>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Дыбыс ойнатуыңыз қолдау көрсетілмейді.
+  </audio>
+
+  <div class="container">
+    <div class="overlay"></div>
+    <div class="content">
+      <img src="FOTO!!.jpg" alt="Арухан" style="max-width: 100%; height: auto; border-radius: 10px;">
+      <h1>Аружан</h1>
+      <p class="decoration">Hen party</p>
+      <p>6 МАУСЫМ 2025 ЖЫЛЫ, 18:00</p>
+      <button class="play-button"
+        onclick="document.getElementById('background-music').muted = !document.getElementById('background-music').muted;">▶</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="decoration">
+        <h1>Әкесінің дарасы, анасының аппағы, біздің ерке-сылқым құрбымыз, Аружан!</h1>
+      </div>
+      <p>Сенің қуанышыңа ортақ болып, ыстық лебізімізді айтып бас қосу мақсатында сені өзіңнің құрметіңе арналған
+        көркем кешке шақырамыз! Ізгі тілекпен, жүректегі толқыныспен 408-топ қыздары❤</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>6 МАУСЫМ 2025 ЖЫЛЫ</h2>
+      <div class="calendar">
+        <p>ДС СР БС ЖМ БС СБ ЖС</p>
+        <div class="calendar-grid">
+          <span>2</span><span>3</span><span>4</span><span>5</span><span
+            class="selected">6</span><span>7</span><span>8</span>
+          <span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+          <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+          <span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
+          <span>30</span>
+        </div>
+        <p>САҒАТ 18:00-ДЕ </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="overlay"></div>
+    <div class="content">
+      <main>
+        <div class="details">
+          <p>Мекенжай:</p>
+          <p><strong>Алматы қаласы</strong></p>
+        </div>
+        <div class="map-link">
+          <a href="https://2gis.kz/almaty/firm/70000001063902417" target="_blank">
+            <img style="width: 40px; border-radius: 10px;"
+              src="https://play-lh.googleusercontent.com/55huczUZ05ruaVynURUNqzgTu0qXLF-SPQZKtE9KA6_BavI-g0NgXz1NR98n5xX33HwD"
+              alt="2GIS">
+          </a>
+        </div>
+      </main>
+      
+      <h2 class="timer-title">Кешке…</h2>
+      <div class="timer" id="timer">
+        <div id="days">00</div>
+        <div id="hours">00</div>
+        <div id="minutes">00</div>
+        <div id="seconds">00</div>
+        
+      </div>
+      <div class="labels">
+          <p>күн</p>
+          <p>сағат</p>
+          <p>минут</p>
+          <p>секунд</p>
+        </div>
+      <h1>Құрметпен, тілеулес құрбыларың, 408-топ қыздары❣</h1>
+      <button class="button">Хабарлау</button>
+    </div>
+  </div>
+
+  <script>
+    // Таймерді орнату
+    const eventDate = new Date("June 6, 2025 18:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("timer").innerHTML = "Той басталды!";
+      }
+    }, 1000);
+
+    // Музыка басқару
+    const audio = document.getElementById('background-music');
+    audio.volume = 0.3;
+  </script>
+</body>
+
+</html>
